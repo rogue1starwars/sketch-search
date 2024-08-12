@@ -1,13 +1,13 @@
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const path = require("path");
-const ort = require("onnxruntime-node");
-const Jimp = require("jimp");
-const tf = require("@tensorflow/tfjs-node");
-const fs = require("fs");
-const sharp = require("sharp");
+import { app, BrowserWindow, ipcMain, dialog } from "electron";
+import { fileURLToPath } from "url";
+import path from "path";
+import ort from "onnxruntime-node";
+import sharp from "sharp";
+import Store from "electron-store";
 
-const IMG_SIZE = 640;
-const NUM_KEYPOINTS = 17;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const CONFIDENCE_THRESHOLD = 0.9;
 const IOU_THRESHOLD = 0.7;
 const WIDTH = 640;
@@ -23,7 +23,7 @@ const createWindow = () => {
     height: 800,
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "preload.mjs"),
     },
   });
 
@@ -47,7 +47,6 @@ app.whenReady().then(() => {
 
     if (result.canceled) return;
 
-    //const keypoints = await predict(result.filePaths[0]);
     const keypoints = await predict(result.filePaths[0]);
 
     return [keypoints, result.filePaths[0]];
@@ -62,7 +61,6 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-const store = new Store();
 // onnx();
 async function predict(path = "./image.png") {
   try {

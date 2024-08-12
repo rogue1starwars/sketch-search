@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A sketch search engine for references",
   "main": "main.js",
+  "type": "module",
+  "build": {
+    "asar": false
+  },
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
