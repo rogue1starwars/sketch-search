@@ -1,0 +1,24 @@
+{
+  "name": "sketchsearch",
+  "version": "1.0.0",
+  "description": "A sketch search engine for references",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryota Tetsuka",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-reloader": "^1.2.3"
+  },
+  "dependencies": {
+    "electron": "^31.3.1",
+    "@tensorflow/tfjs-node": "^4.20.0",
+    "electron-store": "^10.0.0",
+    "jimp": "^0.22.12",
+    "onnxjs": "^0.1.8",
+    "onnxruntime-node": "^1.18.0",
+    "sharp": "^0.33.4"
+  }
+}
