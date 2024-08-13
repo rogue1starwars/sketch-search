@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A sketch search engine for references",
   "main": "main.js",
-  "type": "module",
   "build": {
     "asar": false
   },
@@ -14,11 +13,12 @@
   "author": "Ryota Tetsuka",
   "license": "MIT",
   "devDependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
-    "electron": "^31.3.1",
     "@tensorflow/tfjs-node": "^4.20.0",
+    "electron": "^31.3.1",
     "electron-store": "^10.0.0",
     "jimp": "^0.22.12",
     "onnxjs": "^0.1.8",

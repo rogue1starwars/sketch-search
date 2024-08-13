@@ -1,8 +1,8 @@
 const button = document.getElementById("fileSelector");
 button.addEventListener("click", async () => {
-  const [keypoints, filePath] = await window.versions.openFileDialog();
-  const image = document.getElementById("image");
+  const [keypoints, filePath] = await window.sketchSearch.uploadReference();
   console.log(keypoints);
+  const image = document.getElementById("image");
   const keypoint = keypoints[0];
   image.src = `file://${filePath}`;
   for (let i = 0; i < keypoint.length; i += 2) {
