@@ -1,20 +1,3 @@
-const HierachicalNSW = require("hnswlib-node");
-
-const NUMDIM = 34;
-
-function createNeighborGraph(keypoints) {
-  const index = new HierachicalNSW("l2", NUMDIM);
-  const elements = keypoints.length;
-  index.initIndex(elements);
-
-  for (let i = 0; i < elements; i++) {
-    const point = keypoints[i];
-    index.addDataPoint(point, i);
-  }
-
-  index.writeIndex("index.dat");
-}
-
 function findNeighbors(target_keypoints, references) {
   /*
    * target_keypoints: A list of keypoints for the target image
@@ -67,5 +50,4 @@ function findNeighbors(target_keypoints, references) {
   });
 }
 
-exports.createNeighborGraph = createNeighborGraph;
 exports.findNeighbors = findNeighbors;
