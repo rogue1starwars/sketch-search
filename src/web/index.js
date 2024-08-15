@@ -1,5 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const App = () => {
   const [paths, setPaths] = React.useState([[]]);
@@ -24,11 +26,15 @@ const App = () => {
       >
         Search
       </button>
-      {paths.map((person) => {
-        return person.map((neighbor) => {
-          return <img key={neighbor} src={`file://${neighbor}`} />;
-        });
-      })}
+      <ImageGallery
+        items={paths.flat().map((path) => {
+          return {
+            original: `file://${path}`,
+            thumbnail: `file://${path}`,
+          };
+        })}
+      />
+      ;
     </div>
   );
 };
