@@ -17,7 +17,7 @@ const createWindow = () => {
     },
   });
 
-  win.loadFile("dist/index.html");
+  win.loadFile("build/index.html");
 };
 
 const handleUpload = async () => {
@@ -41,29 +41,34 @@ const handleUpload = async () => {
     keypoints_list.push(keypoints);
   }
 
-  import("electron-store").then((module) => {
-    const Store = module.default || module;
-    const store = new Store();
-    const storedKeypoints = store.get("keypoints");
+  import("electron-store")
+    .then((module) => {
+      const Store = module.default || module;
+      const store = new Store();
+      const storedKeypoints = store.get("keypoints");
 
-    const newKeypoints = { ...storedKeypoints };
-    const promises = result.filePaths.map((filePath) => {
-      if (filePath in storedKeypoints) return Promise.resolve();
-      return predict(filePath).then((keypoints) => {
-        newKeypoints[filePath] = keypoints;
-        return;
+      const newKeypoints = { ...storedKeypoints };
+      const promises = result.filePaths.map((filePath) => {
+        if (storedKeypoints && filePath in storedKeypoints)
+          return Promise.resolve();
+        return predict(filePath)
+          .then((keypoints) => {
+            newKeypoints[filePath] = keypoints;
+            return;
+          })
+          .catch(console.error);
       });
-    });
 
-    Promise.all(promises).then(() => {
-      store.set({
-        keypoints: {
-          ...storedKeypoints,
-          ...newKeypoints,
-        },
+      Promise.all(promises).then(() => {
+        store.set({
+          keypoints: {
+            ...storedKeypoints,
+            ...newKeypoints,
+          },
+        });
       });
-    });
-  });
+    })
+    .catch(console.error);
   return;
 };
 

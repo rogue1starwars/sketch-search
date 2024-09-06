@@ -9,6 +9,7 @@ const App = () => {
     <div>
       <h1>Sketch Search</h1>
       <button
+        style={{ margin: "50px" }}
         onClick={async () => {
           await window.sketchSearch.uploadReference();
           console.log("Uploaded");
@@ -33,6 +34,7 @@ const App = () => {
             thumbnail: `file://${path}`,
           };
         })}
+        showPlayButton={false}
       />
       ;
     </div>

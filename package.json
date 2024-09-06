@@ -4,13 +4,23 @@
   "description": "A sketch search engine for references",
   "main": "src/main.js",
   "build": {
-    "asar": false
+    "asar": false,
+    "files": [
+      "src/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "babel.config.js",
+      "package.json",
+      "webpack.config.js",
+      "!**/.gitignore",
+      "!**/package-lock.json"
+    ]
   },
   "scripts": {
-    "start": "webpack --mode development & electron .",
+    "start": "electron . & webpack --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "make": "electron-forge make"
+    "make": "electron-builder --win --x64"
   },
   "author": "Ryota Tetsuka",
   "license": "MIT",
@@ -18,10 +28,12 @@
     "@babel/core": "^7.25.2",
     "@babel/plugin-transform-react-jsx": "^7.25.2",
     "@babel/plugin-transform-react-jsx-self": "^7.24.7",
-    "@electron-forge/cli": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
     "babel-loader": "^9.1.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",
+    "electron": "^31.4.0",
+    "electron-builder": "^24.13.3",
     "electron-reloader": "^1.2.3",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
@@ -32,10 +44,11 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "electron": "^31.3.1",
+    "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^10.0.0",
     "mini-css-extract-plugin": "^2.9.0",
     "onnxruntime-node": "^1.18.0",
+    "packager": "^0.1.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-image-gallery": "^1.3.0",
