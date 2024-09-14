@@ -13,3 +13,4 @@ Upload any reference data you want from the upload button. These are the images 
 When you want to search a reference for a specific image, (for example, a sketch of an illustration that you are working on) click the search button. The machine learning model will estimate the pose of the given image, and returns a reference image (Image you uploaded above) that is close to the give one.
 
 ## Download
+Download latest version from releases.
